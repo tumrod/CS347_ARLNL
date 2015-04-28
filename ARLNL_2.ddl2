@@ -1,0 +1,112 @@
+DROP SEQUENCE Division_seq ; 
+create sequence Division_seq 
+start with 100 
+increment by 1 
+nomaxvalue 
+;
+DROP TRIGGER Division_PK_trig 
+; 
+
+create or replace trigger Division_PK_trig 
+before insert on Division
+for each row 
+begin 
+select Division_seq.nextval into :new.div_id from dual; 
+end; 
+/
+
+DROP SEQUENCE Employees_seq ; 
+create sequence Employees_seq 
+start with 100 
+increment by 1 
+nomaxvalue 
+;
+DROP TRIGGER Employees_PK_trig 
+; 
+
+create or replace trigger Employees_PK_trig 
+before insert on Employees
+for each row 
+begin 
+select Employees_seq.nextval into :new.employee_id from dual; 
+end; 
+/
+
+DROP SEQUENCE Files_seq ; 
+create sequence Files_seq 
+start with 100 
+increment by 1 
+nomaxvalue 
+;
+DROP TRIGGER Files_PK_trig 
+; 
+
+create or replace trigger Files_PK_trig 
+before insert on Files
+for each row 
+begin 
+select Files_seq.nextval into :new.file_id from dual; 
+end; 
+/
+
+DROP SEQUENCE Lab_seq ; 
+create sequence Lab_seq 
+start with 100 
+increment by 1 
+nomaxvalue 
+;
+DROP TRIGGER Lab_PK_trig 
+; 
+
+create or replace trigger Lab_PK_trig 
+before insert on Lab
+for each row 
+begin 
+select Lab_seq.nextval into :new.lab_id from dual; 
+end; 
+/
+
+DROP SEQUENCE Members_seq ; 
+create sequence Members_seq 
+start with 100 
+increment by 1 
+nomaxvalue 
+;
+DROP TRIGGER Members_PK_trig 
+; 
+
+create or replace trigger Members_PK_trig 
+before insert on Members
+for each row 
+begin 
+select Members_seq.nextval into :new.member_list_id from dual; 
+end; 
+/
+
+DROP SEQUENCE Notice_List_seq ; 
+create sequence Notice_List_seq 
+start with 100 
+increment by 1 
+nomaxvalue 
+;
+DROP TRIGGER Notice_List_PK_trig 
+; 
+
+create or replace trigger Notice_List_PK_trig 
+before insert on Notice_List
+for each row 
+begin 
+select Notice_List_seq.nextval into :new.list_sequence_id from dual; 
+end; 
+/
+
+DROP INDEX Lab_lab_id_FK_0 ;
+CREATE INDEX Lab_lab_id_FK_0 ON Division(Lab_lab_id) ;
+DROP INDEX Notice_List_list_seque_FK_1 ;
+CREATE INDEX Notice_List_list_seque_FK_1 ON Files(Notice_List_list_sequence_id) ;
+DROP INDEX Employees_employee_id_FK_2 ;
+CREATE INDEX Employees_employee_id_FK_2 ON Members(Employees_employee_id) ;
+DROP INDEX Notice_List_list_seque_FK_3 ;
+CREATE INDEX Notice_List_list_seque_FK_3 ON Members(Notice_List_list_sequence_id) ;
+DROP INDEX Notice_List_list_seque_FK_4 ;
+CREATE INDEX Notice_List_list_seque_FK_4 ON Members(Notice_List_list_sequence_id1) ;
